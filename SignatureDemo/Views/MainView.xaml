@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SignatureDemo.Views"
         mc:Ignorable="d" FontSize="18" FontFamily="Comic Sans MS"
-        Title="MainView" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Signature Demo" Height="400" Width="400" 
+        WindowStartupLocation="CenterScreen" Icon="SDIcon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

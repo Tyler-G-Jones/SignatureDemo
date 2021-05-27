@@ -20,9 +20,9 @@ namespace SignatureDemo.assets
         public const string PfGroupshares = @"\\swaugfs03.wt001.net\Groupshares\";
         public const string ESPath = PfGroupshares + "Stores\\Engineer Suite - Programs\\publish\\Essential Files\\";
 
-        public const string PathTemplateSignature = ESPath + "templateSignature.docx";
-        public const string PathDok = ESPath + @"dok\dok.exe";
-        public static string PathAltDok = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Visual Studio\References\DOK\dok-1.2.0\dok.exe";
+        public static string LocalDirectory = Directory.GetCurrentDirectory();
+        public static string PathTemplateSignature = "../../assets/templateSignature.docx";
+        public static string PathDok = "../../assets/dok.exe";
         public static string PathSave = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Generated\";
 
         public static Dictionary<string, string> TemplateRef = new Dictionary<string, string>(){
@@ -34,7 +34,7 @@ namespace SignatureDemo.assets
             Console.WriteLine("[DEBUG] Verifying paths exist...");
             List<string> paths = new List<string>();
             paths.Add(PathTemplateSignature);
-            paths.Add(PathAltDok);
+            paths.Add(PathDok);
             paths.Add(PathSave);
             for (int i=0; i<paths.Count; i++)
             {
@@ -89,12 +89,21 @@ namespace SignatureDemo.assets
         public static int Create(string JSON, string template, string save, bool forceOverwrite)
         {
             Console.WriteLine("[DokWriter.Create] Generating document : " + template + " " + save + " " + forceOverwrite);
-            //DebugPath();
+            DebugPath();
 
             // Process arguments.
             string jsonPath = Path.Combine(Path.GetTempPath(), "dok.json");
             string args = string.Concat("\"", jsonPath, "\" \"", TemplateRef[template], "\" ", PathSave + save);
             if (forceOverwrite) { args += " -f"; }
+
+            try
+            {
+                FileAttributes attr = File.GetAttributes(PathSave);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Directory.CreateDirectory(PathSave);
+            }
 
             // Write JSON to file. 
             File.WriteAllText(jsonPath, JSON);
@@ -104,12 +113,9 @@ namespace SignatureDemo.assets
             {
                 UseShellExecute = false,
                 CreateNoWindow = true,
-                FileName = PathAltDok,
+                FileName = PathDok,
                 Arguments = args
             };
-            Console.WriteLine(args);
-            Console.WriteLine(JSON);
-            Console.WriteLine(PathAltDok);
             try
             {
                 // Starting child process.
