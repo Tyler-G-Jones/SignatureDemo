@@ -10,6 +10,7 @@ using System.CodeDom.Compiler;
 using System.CodeDom;
 using Newtonsoft.Json;
 
+
 namespace SignatureDemo.assets
 {
     public abstract class DokWriter
@@ -21,8 +22,8 @@ namespace SignatureDemo.assets
         public const string ESPath = PfGroupshares + "Stores\\Engineer Suite - Programs\\publish\\Essential Files\\";
 
         public static string LocalDirectory = Directory.GetCurrentDirectory();
-        public static string PathTemplateSignature = "../../assets/templateSignature.docx";
-        public static string PathDok = "../../assets/dok.exe";
+        public static string PathTemplateSignature = "assets/templateSignature.docx";
+        public static string PathDok = "assets/dok.exe";
         public static string PathSave = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Generated\";
 
         public static Dictionary<string, string> TemplateRef = new Dictionary<string, string>(){

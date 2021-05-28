@@ -47,7 +47,7 @@
 
         <!-- Row 4 -->
         <Button Grid.Row="4" Grid.Column="1"
-                x:Name="GenerateDoc">Generate</Button>
+                x:Name="GenerateDoc" >Generate</Button>
         
         <!-- Row 5 -->
         <TextBlock Text="{Binding Path=StatusGenerated, Mode=OneWay}" 
