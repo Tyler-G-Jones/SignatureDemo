@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
-using SignatureDemo.assets;
 using Newtonsoft.Json;
 using DOK;
 
@@ -107,20 +106,23 @@ namespace SignatureDemo.ViewModels
             }
             else
             {
-                //string jsonSignature = SelectedUser.EvoquaSignature;
-                //string save = "Signature_" + SelectedUser.Name + ".docx";
-                //bool forceOverwrite = true;
-                //int exitCode = DokWriter.Create(jsonSignature, "signature", save, forceOverwrite);
-
                 string jsonSignature = SelectedUser.EvoquaSignature;
-                string savePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Generated", 
-                    SelectedUser.Name + "_Signature.docx");
+                string savePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Generated");
+                try
+                {
+                    FileAttributes attr = File.GetAttributes(savePath);
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    Directory.CreateDirectory(savePath);
+                }
+                savePath = Path.Combine(savePath, SelectedUser.Name + "_Signature.docx");
                 string templatePath = Path.Combine(Environment.CurrentDirectory, "assets", "templateSignature.docx");
                 int exitCode = Templater.Create(jsonSignature, templatePath, savePath, true);
-                Console.WriteLine(jsonSignature);
-                Console.WriteLine(savePath);
-                Console.WriteLine(templatePath);
-                Console.WriteLine(exitCode);
+                //Console.WriteLine(jsonSignature);
+                //Console.WriteLine(savePath);
+                //Console.WriteLine(templatePath);
+                //Console.WriteLine(exitCode);
 
                 if (exitCode != 0)
                 {
