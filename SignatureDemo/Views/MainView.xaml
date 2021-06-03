@@ -51,7 +51,7 @@
         
         <!-- Row 5 -->
         <TextBlock Text="{Binding Path=StatusGenerated, Mode=OneWay}" 
-                   Grid.Row="5" Grid.Column="1" />
+                   Grid.Row="5" Grid.Column="1" FontSize="12" ></TextBlock>
 
     </Grid>
 </Window>

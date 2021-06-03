@@ -49,6 +49,18 @@ namespace SignatureDemo.ViewModels
                     ""SEmail"" : ""matthew.roegner@evoqua.com""
                 }
                 " });
+            Users.Add(new UserModel { Name = "Anthony", EvoquaSignature = @"
+                {
+                    ""SName"" : ""Anthony Bailey"",
+                    ""STitle"" : ""Master Field Service Technician"",
+                    ""SPhones"" : [
+                    {
+                    ""SPNum"" : ""Office:       (262) 521-8570 ""
+                    }
+                    ],
+                    ""SEmail"" : ""anthony.bailey@evoqua.com""
+                }
+                " });
         }
 
         public string Name
@@ -130,7 +142,7 @@ namespace SignatureDemo.ViewModels
                 }
                 else
                 {
-                    StatusGenerated = "Document generated!";
+                    StatusGenerated = "Created! (Desktop/Generated/" + SelectedUser.Name + "_Signature.docx)";
                 }
             }
         }
